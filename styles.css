@@ -13,12 +13,42 @@ body {
   margin: 0%;
   background-color: #46424D;
   font-family: Montserrat;
-  font-size: 12px;
+  color: #CBC9CF;
 }
 
 header {
   text-align: center;
-  font-size: 2em;
+  font-size: 3vh;
+  margin-top: 1.5%;
+}
+
+h1{
+  font-size: 3vh;
+}
+
+h2 {
+  font-size: 2.5vh;
+  color: #FFF;
+}
+
+p{
+  font-size: 2vh;
+  text-align: center;
+  margin: 1vh 0;
+}
+
+input[type="text"] {
+  width: 97%;
+  background-color: #46424D;
+  border: 0;
+  color: #CBC9CF;
+  outline: none;
+  font-size: 2.5vh;
+}
+
+hr {
+  margin: 0;
+  border-color: #CBC9CF;
 }
 
 .wrapper {
@@ -26,8 +56,7 @@ header {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 90%;
-  margin-top: 3.5em;
+  height: 91%;
   bottom: 0;
 }
 
@@ -36,7 +65,7 @@ display: flex;
 flex-direction: column;
 background-color:#2B2733;
 width: 60%;
-margin-right:0.5%;
+margin-right:0.3%;
 }
 
 .past-activity-box {
@@ -49,5 +78,89 @@ margin-right:0.5%;
   width: 56%;
   height: 85%;
   background-color: #46424D;
-  margin: 4% 2% 10% 2%;
+  margin: 5.5% 2% 0% 2%;
+  border-radius: 0.5vh;
+  box-shadow: 3px 3px 4px 5px #26222D;
+}
+
+#category-box-wrapper {
+  padding: 5vh 14vh;
+}
+
+.all-category-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.category-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0.3vh solid #FFF;
+  border-radius: 0.5vh;
+  width: 22vh;
+  height: 10vh;
+  background-color: #46424D;
+  color: #FFF;
+  font-size: 2.5vh;
+}
+
+.category-images {
+  width: 3vh;
+  height: 3vh;
+  margin-bottom: 0.5vh;
+}
+
+.activity-title {
+  margin-left: 3.2%;
+  margin-top: 4vh;
+}
+
+#accomplish-inputs {
+  margin-top: 8vh;
+}
+
+#select-category-title {
+  margin-bottom: 3vh;
+}
+
+.new-activity-title {
+  margin-bottom: 3vh;
+}
+
+.min-sec-input {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8vh;
+}
+
+#minutes-inputs {
+  width: 42%;
+}
+
+#seconds-inputs {
+  width: 42%;
+  text-align: left;
+}
+
+#start-button {
+  margin-top: 5vh;
+  height: 5vh;
+  width: 25vh;
+  border-radius: 0.5vh;
+  border: 0;
+  font-size: 2.2vh;
+}
+
+#start-button-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: relative;
+}
+
+#no-activity-message {
+  margin-top: 6vh;
 }
