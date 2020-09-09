@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Intention Timer</title>
+  </head>
+  <body>
+    <header>INTENTION TIMER</header>
+    <main class="wrapper">
+      <section class="new-activity-box">
+        <h1 class="activity-title">New Activity</h1>
+        <section class="category-box">
+          <div id="category-box-wrapper">
+            <h2 id="select-category-title">Select a category:</h2>
+            <div class="all-category-buttons">
+              <button class="category-buttons" id="study-category"><img class="category-images" src="./assets/study.svg">Study</button>
+              <button class="category-buttons" id="meditate-category"><img class="category-images" src="./assets/meditate.svg">Meditate</button>
+              <button class="category-buttons" id="exercise-category"><img class="category-images" src="./assets/exercise.svg">Exercise</button>
+            </div>
+            <div id="accomplish-inputs">
+              <h2 class="new-activity-title">What would you like to accomplish during this time?</h2>
+              <input type="text" name="activity-input" id="activity-name">
+              <hr>
+            </div>
+            <div class="min-sec-input">
+              <div  id="minutes-inputs">
+                <h2 class="new-activity-title">Minutes</h2>
+                <input type="text" name="activity-input" id="minutes-line">
+                <hr>
+              </div>
+              <div  id="seconds-inputs">
+                <h2 class="new-activity-title">Seconds</h2>
+                <input type="text" name="activity-input" id="seconds-line">
+                <hr>
+              </div>
+            </div>
+            <div id="start-button-box">
+              <button type="button" id="start-button">START ACTIVITY</button>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section class="past-activity-box">
+        <h1 class="activity-title">Past Activities</h1>
+        <section id="past-activity-tracker">
+          <div id="activity-cards">
+            <div id="no-activity-message">
+              <p>You haven't log any activities yet.</p>
+              <p>Complete the form to the left to get started!</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+  <script type="text/javascript" src="activity.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  </html>
