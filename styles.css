@@ -87,10 +87,24 @@ margin-right:0.3%;
   padding: 5vh 14vh;
 }
 
-.all-category-buttons {
+.radio-button-group {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.radio-button-container {
+  position: relative;
+}
+
+.radio-button {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .category-buttons {

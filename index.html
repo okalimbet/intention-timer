@@ -14,10 +14,34 @@
         <section class="category-box">
           <div id="category-box-wrapper">
             <h2 id="select-category-title">Select a category:</h2>
-            <div class="all-category-buttons">
-              <button class="category-buttons" id="study-category"><img class="category-images" src="./assets/study.svg">Study</button>
-              <button class="category-buttons" id="meditate-category"><img class="category-images" src="./assets/meditate.svg">Meditate</button>
-              <button class="category-buttons" id="exercise-category"><img class="category-images" src="./assets/exercise.svg">Exercise</button>
+            <div class="radio-button-group">
+              <div class="radio-button-container">
+                <input type="radio" name="activity-button" id="study" class="radio-button">
+                <div class="category-buttons">
+                  <div class="radio-icon">
+                    <img class="category-images" src="./assets/study.svg">
+                  </div>
+                  <label class="activity-labels">Study</label>
+                </div>
+              </div>
+              <div class="radio-button-container">
+                <input type="radio" name="activity-button" id="meditate" class="radio-button">
+                <div class="category-buttons">
+                  <div class="radio-icon">
+                    <img class="category-images" src="./assets/meditate.svg">
+                  </div>
+                  <label class="activity-labels">Meditate</label>
+                </div>
+              </div>
+              <div class="radio-button-container">
+                <input type="radio" name="activity-button" id="exercise" class="radio-button">
+                <div class="category-buttons">
+                  <div class="radio-icon">
+                    <img class="category-images" src="./assets/exercise.svg">
+                  </div>
+                  <label class="activity-labels">Exercise</label>
+                </div>
+              </div>
             </div>
             <div id="accomplish-inputs">
               <h2 class="new-activity-title">What would you like to accomplish during this time?</h2>
