@@ -58,6 +58,8 @@ hr {
   width: 100%;
   height: 91%;
   bottom: 0;
+  min-width: 1080px;
+  min-height: 600px;
 }
 
 .new-activity-box {
@@ -123,7 +125,23 @@ margin-right:0.3%;
   font-size: 2.5vh;
 }
 
-#study-button-checked {
+input[id="study"]:checked ~ .category-buttons {
+  border: 0.3vh solid #B3FD78;
+  color: #B3FD78;
+}
+
+input[id="meditate"]:checked ~ .category-buttons {
+  border: 0.3vh solid #C278FD;
+  color: #C278FD;
+}
+
+input[id="exercise"]:checked ~ .category-buttons {
+  border: 0.3vh solid #FD8078;
+  color: #FD8078;
+}
+
+
+/* #study-button-checked {
   border: 0.3vh solid #B3FD78;
   color: #B3FD78;
 }
@@ -136,7 +154,7 @@ margin-right:0.3%;
 #exercise-button-checked {
   border: 0.3vh solid #FD8078;
   color: #FD8078;
-}
+} */
 
 .category-images {
   width: 3vh;
