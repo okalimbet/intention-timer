@@ -107,6 +107,8 @@ margin-right:0.3%;
   margin: 0;
 }
 
+
+
 .category-buttons {
   display: flex;
   flex-direction: column;
@@ -121,10 +123,29 @@ margin-right:0.3%;
   font-size: 2.5vh;
 }
 
+#study-button-checked {
+  border: 0.3vh solid #B3FD78;
+  color: #B3FD78;
+}
+
+#meditate-button-checked {
+  border: 0.3vh solid #C278FD;
+  color: #C278FD;
+}
+
+#exercise-button-checked {
+  border: 0.3vh solid #FD8078;
+  color: #FD8078;
+}
+
 .category-images {
   width: 3vh;
   height: 3vh;
   margin-bottom: 0.5vh;
+}
+
+.hidden {
+  display: none;
 }
 
 .activity-title {
