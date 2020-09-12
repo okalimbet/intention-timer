@@ -132,6 +132,7 @@ function startTimerCountdown () {
 function displayCompleteMessage() {
 
   roundBtn.innerText = "COMPLETE!";
+
   logActivityBtn.classList.remove("hidden");
   document.querySelector("#congrats-message").classList.remove("hidden")
   userTimeInput.classList.add("hidden")

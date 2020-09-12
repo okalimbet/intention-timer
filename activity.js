@@ -12,7 +12,7 @@ class Activity {
     startTimer() {
         var secs = this.seconds;
         var mins = this.minutes;
-
+        roundBtn.disabled = true;
         function tick() {
           var current_minutes = mins
           secs--;
@@ -36,7 +36,7 @@ class Activity {
     }
 
     markComplete(){
-      
+
     }
 
     saveToStorage(){
