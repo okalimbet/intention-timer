@@ -14,6 +14,7 @@ body {
   background-color: #46424D;
   font-family: Montserrat;
   color: #CBC9CF;
+  overflow: auto;
 }
 
 header {
@@ -46,6 +47,21 @@ input[type="text"] {
   font-size: 2.5vh;
 }
 
+input[type="number"] {
+  width: 97%;
+  background-color: #46424D;
+  border: 0;
+  color: #CBC9CF;
+  outline: none;
+  font-size: 2.5vh;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 hr {
   margin: 0;
   border-color: #CBC9CF;
@@ -58,6 +74,9 @@ hr {
   width: 100%;
   height: 91%;
   bottom: 0;
+  min-width: 1080px;
+  min-height: 600px;
+  overflow: hidden;
 }
 
 .new-activity-box {
@@ -107,8 +126,6 @@ margin-right:0.3%;
   margin: 0;
 }
 
-
-
 .category-buttons {
   display: flex;
   flex-direction: column;
@@ -123,17 +140,29 @@ margin-right:0.3%;
   font-size: 2.5vh;
 }
 
-#study-button-checked {
+#round-button {
+  margin-top: 4vh;
+  font-size: 4vh;
+  color: #CBC9CF;
+  background-color: #46424D;
+  height: 32vh;
+  width: 32vh;
+  border-radius: 50%;
+  border: 0.5vh solid;
+  border-color: #FFF;
+}
+
+input[id="study"]:checked + div.category-buttons {
   border: 0.3vh solid #B3FD78;
   color: #B3FD78;
 }
 
-#meditate-button-checked {
+input[id="meditate"]:checked + div.category-buttons {
   border: 0.3vh solid #C278FD;
   color: #C278FD;
 }
 
-#exercise-button-checked {
+input[id="exercise"]:checked + div.category-buttons {
   border: 0.3vh solid #FD8078;
   color: #FD8078;
 }
@@ -142,10 +171,6 @@ margin-right:0.3%;
   width: 3vh;
   height: 3vh;
   margin-bottom: 0.5vh;
-}
-
-.hidden {
-  display: none;
 }
 
 .activity-title {
@@ -163,6 +188,23 @@ margin-right:0.3%;
 
 .new-activity-title {
   margin-bottom: 3vh;
+}
+
+.warning-message-box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+#warning-phrase {
+  color: #EFB7EC;
+  margin: 3vh 0vh 0 1vh;
+}
+
+#warning-image {
+  width: 3vh;
+  height: 2.6vh;
+  margin-bottom: 0.5vh;
 }
 
 .min-sec-input {
@@ -198,4 +240,30 @@ margin-right:0.3%;
 
 #no-activity-message {
   margin-top: 6vh;
+}
+
+#current-activity-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 22vh 0 22vh;
+  margin: 4vh 0 4vh 0;
+}
+
+#current-activity-description {
+  font-size: 3vh;
+  color: #CBC9CF;
+  margin-bottom: 0;
+}
+
+#timer {
+  font-size: 13vh;
+  font-weight: 600;
+  font-family: sans-serif;
+  color: #FFF;
+}
+
+.hidden {
+  display: none;
 }
