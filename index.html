@@ -12,6 +12,7 @@
     <section class="new-activity-box">
       <h1 id="new-activity-title" class="activity-title">New Activity</h1>
       <h1 id="current-activity-title" class="activity-title hidden">Current Activity</h1>
+      <h1 id="completed-activity-title" class="activity-title hidden">Completed Activity</h1>
       <section id="new-activity-window"class="category-box">
         <div id="category-box-wrapper">
           <h2 id="select-category-title">Select a category:</h2>
@@ -70,17 +71,23 @@
             </div>
           </div>
           <div id="start-button-box">
-            <button type="button" id="start-button">START ACTIVITY</button>
+            <button type="button" class="activity-window-buttons">START ACTIVITY</button>
           </div>
         </div>
       </section>
       <section id="current-activity-window" class="category-box hidden">
-        <div id="current-activity-wrapper">
+        <div id="current-activity-wrapper" class="">
           <h2 id="current-activity-description">Deep Breathing</h2>
-            <span id="timer">00:59</span>
-            <button type="button" id="round-button" class="">START</button>
-            <button class="hidden">LOG ACTIVITY</button>
+            <div class="timer-message-wrapper">
+              <span id="timer" class="">00:59</span>
+              <span id="congrats-message" class="hidden">You did it!</span>
+            </div>
+            <button type="button" id="round-button">START</button>
+            <button id="log-activity-button" class="activity-window-buttons hidden">LOG ACTIVITY</button>
         </div>
+      </section>
+      <section id="completed-activity-window" class="category-box hidden">
+        <button id="create-activity-button" class="activity-window-buttons">CREATE A NEW ACTIVITY</button>
       </section>
     </section>
     <section class="past-activity-box">

@@ -1,5 +1,10 @@
 var newActivityFormView = document.querySelector("#new-activity-window").classList;
 var currentActivityView = document.querySelector("#current-activity-window").classList;
+var completedActivityView = document.querySelector("#completed-activity-window").classList;
+
+var newActivityTitle = document.querySelector("#new-activity-title").classList;
+var currentActivityTitle = document.querySelector("#current-activity-title").classList;
+var completedActivityTitle = document.querySelector("#completed-activity-title").classList;
 
 var activityInput = document.querySelector('#activity-name');
 var minuteInput = document.querySelector('#minutes-line');
@@ -9,8 +14,9 @@ var userTimeInput = document.querySelector("#timer");
 var studyRadioBtn = document.querySelector("#study");
 var meditateRadioBtn = document.querySelector("#meditate");
 var exerciseRadioBtn = document.querySelector("#exercise");
-var startActivityBtn = document.querySelector('#start-button');
+var startActivityBtn = document.querySelector('#start-button-box, .activity-window-buttons');
 var roundBtn = document.querySelector("#round-button");
+var logActivityBtn = document.querySelector("#log-activity-button")
 
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
@@ -21,8 +27,8 @@ var isFormCorrect;
 //EVENT LISTENERS
 startActivityBtn.addEventListener('click', submitActivityForm);
 radioBtnGrp.addEventListener(`click`, switchCategoryBtnImg);
-roundBtn.addEventListener('click', startCountDownTimer);
-
+roundBtn.addEventListener('click', startTimerCountdown);
+logActivityBtn.addEventListener('click', logCompletedActivity)
 //FUNCTOINS
 function switchCategoryBtnImg() {
   var studyImageEnable = document.querySelector('#study-color-enabled').classList;
@@ -72,8 +78,6 @@ function switchRoundBtnColor(choosenCategory) {
 // }
 
 function submitActivityForm () {
-  var newActivityTitle = document.querySelector("#new-activity-title").classList;
-  var currentActivityTitle = document.querySelector("#current-activity-title").classList;
 
   scanUserFormForErrors();
   switchRoundBtnColor(getRadioBtnCategory());
@@ -121,28 +125,22 @@ function displayUserInput() {
   userTimeInput.innerHTML = (userMinutes < 10 ? "0" : "") + String(userMinutes) + ":" + (userSeconds < 10 ? "0" : "") + String(userSeconds);
 };
 
-function startCountDownTimer() {
-  var secs = newActivity.seconds;
-  var mins = newActivity.minutes;
+function startTimerCountdown () {
+  newActivity.startTimer();
+}
 
-  function tick() {
-    var current_minutes = mins
-    secs--;
-    userTimeInput.innerHTML = (mins < 10 ? "0" : "") + String(current_minutes) + ":" + (secs < 10 ? "0" : "") + String(secs);
-    if( secs > 0 ) {
-      setTimeout(tick, 1000);
-    }
-    else if(secs === 0 && mins > 0) {
-      secs = 60;
-      mins--;
-      setTimeout(tick, 1000);
-    }
-    else if(mins > 1) {
-        startCountDownTimer(mins-1);
-    }
-    else {
-        alert("Time is up!");
-    }
-  }
-  tick();
+function displayCompleteMessage() {
+
+  roundBtn.innerText = "COMPLETE!";
+  logActivityBtn.classList.remove("hidden");
+  document.querySelector("#congrats-message").classList.remove("hidden")
+  userTimeInput.classList.add("hidden")
+}
+
+function logCompletedActivity() {
+  currentActivityView.add("hidden");
+  completedActivityView.remove("hidden");
+
+  completedActivityTitle.remove("hidden");
+  currentActivityTitle.add("hidden");
 }
