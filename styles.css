@@ -167,6 +167,11 @@ input[id="exercise"]:checked + div.category-buttons {
   color: #FD8078;
 }
 
+button:focus { 
+  border: none; 
+  outline: none; 
+}
+
 .category-images {
   width: 3vh;
   height: 3vh;
