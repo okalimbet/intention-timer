@@ -9,17 +9,19 @@ var userTimeInput = document.querySelector("#timer");
 var studyRadioBtn = document.querySelector("#study");
 var meditateRadioBtn = document.querySelector("#meditate");
 var exerciseRadioBtn = document.querySelector("#exercise");
-
+var startActivityBtn = document.querySelector('#start-button');
 var roundBtn = document.querySelector("#round-button");
-var startActivityButton = document.querySelector('#start-button');
+
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
+
 var newActivity = [];
 var isFormCorrect;
 
 //EVENT LISTENERS
-startActivityButton.addEventListener('click', submitActivityForm);
+startActivityBtn.addEventListener('click', submitActivityForm);
 radioBtnGrp.addEventListener(`click`, switchCategoryBtnImg);
+roundBtn.addEventListener('click', startCountDownTimer);
 
 //FUNCTOINS
 function switchCategoryBtnImg() {
@@ -37,28 +39,27 @@ function switchCategoryBtnImg() {
   :(exerciseImageEnable.add("hidden"),exerciseImageDisable.remove("hidden"));
 };
 
-//TO-DO FIX THE FUCTION NAME AND ORDER EBCAUSE IT RETURN ID BUT ALSO CHANGES COLORS
 function getRadioBtnCategory() {
   if (studyRadioBtn.checked) {
-    return studyRadioBtn.id
+    return studyRadioBtn.id;
   }
   else if (meditateRadioBtn.checked) {
-    return meditateRadioBtn.id
+    return meditateRadioBtn.id;
   }
   else if (exerciseRadioBtn.checked) {
-    return exerciseRadioBtn.id
+    return exerciseRadioBtn.id;
   }
 };
 
 function switchRoundBtnColor(choosenCategory) {
   if(choosenCategory === "study") {
-    roundBtn.style.borderColor = "#B3FD78"
+    roundBtn.style.borderColor = "#B3FD78";
   }
   else if (choosenCategory === "meditate") {
-      roundBtn.style.borderColor = "#C278FD"
+      roundBtn.style.borderColor = "#C278FD";
   }
   else if (choosenCategory === "exercise") {
-    roundBtn.style.borderColor = "#FD8078"
+    roundBtn.style.borderColor = "#FD8078";
   }
 };
 
@@ -71,17 +72,19 @@ function switchRoundBtnColor(choosenCategory) {
 // }
 
 function submitActivityForm () {
-  var newActivityTitle = document.querySelector("#new-activity-title").classList
-  var currentActivityTitle = document.querySelector("#current-activity-title").classList
-  scanUserFormForErrors()
+  var newActivityTitle = document.querySelector("#new-activity-title").classList;
+  var currentActivityTitle = document.querySelector("#current-activity-title").classList;
+
+  scanUserFormForErrors();
   switchRoundBtnColor(getRadioBtnCategory());
+
   if(isCorrect === true) {
     newActivityTitle.add("hidden")
     currentActivityTitle.remove("hidden")
     newActivityFormView.add("hidden");
     currentActivityView.remove("hidden");
     submitNewActivityForm();
-    displayUserInput()
+    displayUserInput();
   }
 };
 
@@ -95,6 +98,7 @@ function scanUserFormForErrors() {
   : (activityInput.value === "") ? warningMessage.remove("hidden")
   : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? alert("Please select a category!")
   : isCorrect = true;
+
   return isCorrect;
 };
 
@@ -109,19 +113,36 @@ function submitNewActivityForm() {
 };
 
 function displayUserInput() {
-  var userDescription = document.querySelector("#current-activity-description")
+  var userDescription = document.querySelector("#current-activity-description");
+  var userMinutes = newActivity.minutes;
+  var userSeconds = newActivity.seconds;
 
   userDescription.innerText = newActivity.description;
-
- if (newActivity.minutes <= 9 && newActivity.seconds > 9) { userTimeInput.innerHTML = `0${newActivity.minutes}:${newActivity.seconds}`
-  }
- else if (newActivity.seconds <= 9 && newActivity.minutes > 9) {
-  userTimeInput.innerHTML = `${newActivity.minutes}:0${newActivity.seconds}`
-  }
-  else if (newActivity.seconds <= 9 && newActivity.minutes <= 9) {
-   userTimeInput.innerHTML = `0${newActivity.minutes}:0${newActivity.seconds}`
-   }
-   else {
-     userTimeInput.innerHTML = `${newActivity.minutes}:${newActivity.seconds}`
-   }
+  userTimeInput.innerHTML = (userMinutes < 10 ? "0" : "") + String(userMinutes) + ":" + (userSeconds < 10 ? "0" : "") + String(userSeconds);
 };
+
+function startCountDownTimer() {
+  var secs = newActivity.seconds;
+  var mins = newActivity.minutes;
+
+  function tick() {
+    var current_minutes = mins
+    secs--;
+    userTimeInput.innerHTML = (mins < 10 ? "0" : "") + String(current_minutes) + ":" + (secs < 10 ? "0" : "") + String(secs);
+    if( secs > 0 ) {
+      setTimeout(tick, 1000);
+    }
+    else if(secs === 0 && mins > 0) {
+      secs = 60;
+      mins--;
+      setTimeout(tick, 1000);
+    }
+    else if(mins > 1) {
+        startCountDownTimer(mins-1);
+    }
+    else {
+        alert("Time is up!");
+    }
+  }
+  tick();
+}
