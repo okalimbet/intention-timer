@@ -16,20 +16,25 @@ var meditateRadioBtn = document.querySelector("#meditate");
 var exerciseRadioBtn = document.querySelector("#exercise");
 var startActivityBtn = document.querySelector('#start-button-box, .activity-window-buttons');
 var roundBtn = document.querySelector("#round-button");
-var logActivityBtn = document.querySelector("#log-activity-button")
+var logActivityBtn = document.querySelector("#log-activity-button");
+var createNewActivityBtn = document.querySelector("#create-activity-button")
 
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
 var cardColorIndicator = document.querySelector(".color-indicator");
+var congratMessage = document.querySelector("#congrats-message").classList;
 
-var newActivity = [];
+var newActivity;
+var pastActivities = [];
 var isFormCorrect;
+var color;
 
 //EVENT LISTENERS
 startActivityBtn.addEventListener('click', submitActivityForm);
 radioBtnGrp.addEventListener(`click`, switchCategoryBtnImg);
 roundBtn.addEventListener('click', startTimerCountdown);
-logActivityBtn.addEventListener('click', logCompletedActivity)
+logActivityBtn.addEventListener('click', logCompletedActivity);
+createNewActivityBtn.addEventListener('click', returnToMainPage);
 //FUNCTOINS
 function switchCategoryBtnImg() {
   var studyImageEnable = document.querySelector('#study-color-enabled').classList;
@@ -70,17 +75,30 @@ function switchRoundBtnColor(choosenCategory) {
   }
 };
 
+function switCardIndicatorColor(selectedCategory) {
+  if(selectedCategory === "study") {
+    return color = "#B3FD78";
+  }
+  else if (selectedCategory === "meditate") {
+    return color = "#C278FD";
+  }
+  else if (selectedCategory === "exercise") {
+    return color = "#FD8078";
+  }
+};
+
 function submitActivityForm () {
 
   scanUserFormForErrors();
   switchRoundBtnColor(getRadioBtnCategory());
+  switCardIndicatorColor(getRadioBtnCategory());
 
-  if(isCorrect === true) {
+  if(isFormCorrect === true) {
     newActivityTitle.add("hidden")
     currentActivityTitle.remove("hidden")
     newActivityFormView.add("hidden");
     currentActivityView.remove("hidden");
-    submitNewActivityForm();
+    createUserNewActivity();
     displayUserInput();
   }
 };
@@ -94,12 +112,12 @@ function scanUserFormForErrors() {
   : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? alert("Please enter numbers only!")
   : (activityInput.value === "") ? warningMessage.remove("hidden")
   : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? alert("Please select a category!")
-  : isCorrect = true;
+  : isFormCorrect = true;
 
-  return isCorrect;
+  return isFormCorrect;
 };
 
-function submitNewActivityForm() {
+function createUserNewActivity() {
   newActivity = new Activity (
   getRadioBtnCategory(),
   activityInput.value,
@@ -127,7 +145,7 @@ function displayCompleteMessage() {
   roundBtn.innerText = "COMPLETE!";
 
   logActivityBtn.classList.remove("hidden");
-  document.querySelector("#congrats-message").classList.remove("hidden")
+  congratMessage.remove("hidden")
   userTimeInput.classList.add("hidden")
 }
 
@@ -142,11 +160,28 @@ function logCompletedActivity() {
 
 function addCompletedActivityCard() {
   newActivity.markComplete()
+  pastActivities.push(newActivity)
 }
 
 function clearFormInputs() {
-  activityInput.value = ""
-  minuteInput.value = ""
-  secondInput.value = ""
-  warningMessage.add("hidden")
+  studyRadioBtn.checked = false;
+  meditateRadioBtn.checked = false;
+  exerciseRadioBtn.checked = false;
+  activityInput.value = "";
+  minuteInput.value = "";
+  secondInput.value = "";
+  warningMessage.add("hidden");
+  roundBtn.innerText = "START";
+  logActivityBtn.classList.add("hidden");
+  congratMessage.add("hidden");
+  completedActivityTitle.add("hidden");
+  newActivityTitle.remove("hidden");
+  userTimeInput.classList.remove("hidden")
+}
+
+function returnToMainPage() {
+  clearFormInputs();
+  switchCategoryBtnImg();
+  completedActivityView.add("hidden");
+  newActivityFormView.remove("hidden");
 }

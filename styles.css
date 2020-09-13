@@ -90,6 +90,7 @@ margin-right:0.3%;
 .past-activity-box {
   background-color:#2B2733;
   width: 39.5%;
+  overflow: scroll;
 }
 
 .category-box {
@@ -103,7 +104,7 @@ margin-right:0.3%;
 }
 
 #category-box-wrapper {
-  padding: 5vh 14vh;
+  margin: 10%;
 }
 
 .radio-button-group {
@@ -237,7 +238,7 @@ button:focus { 
 }
 
 #log-activity-button {
-  width: 75%;
+  width: 34vh;
 }
 
 #start-button-box {
@@ -274,16 +275,22 @@ button:focus { 
 }
 #congrats-message {
   font-size: 8vh;
+  white-space: nowrap;
 }
 
 #completed-activity-window {
   justify-content: center;
 }
 
+#create-activity-button-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 #create-activity-button {
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 10vh;
+  width: 42vh;
+  margin-top: 15vh;
 }
 
 .timer-message-wrapper {
@@ -301,8 +308,7 @@ li {
   flex-direction: row;
   justify-content: space-between;
   padding: 1.5vh;
-  margin-left: 3.2%;
-  margin-right: 3.2%;
+  margin: 4.2% 3.2%;
   background-color: #46424D;
   list-style-type: none;
   border-radius: 1vh;

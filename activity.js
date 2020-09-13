@@ -38,6 +38,7 @@ class Activity {
     markComplete(){
       var ul = document.querySelector('ul');
       var li = document.createElement('li');
+      roundBtn.disabled = false;
       var activityCardBlock =
        `
          <li id=${this.id}><div class="card">
@@ -45,12 +46,11 @@ class Activity {
            <label id="card-time">${this.minutes} MIN ${this.seconds} SECONDS</label>
            <label id="card-description">${this.description}</label>
          </div>
-         <div class="color-indicator"></div>
+         <div class="color-indicator" style="background-color: ${[color]};"></div>
          </li>
         `
-        if (this.category === "study") {
-           cardColorIndicator.style.backgroundColor = "#B3FD78"}
-      ul.insertAdjacentHTML("afterbegin", activityCardBlock)
+      ul.insertAdjacentHTML("afterbegin", activityCardBlock);
+      this.completed = true;
 }
 
     saveToStorage(){
