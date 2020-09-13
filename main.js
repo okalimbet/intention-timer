@@ -1,5 +1,10 @@
 var newActivityFormView = document.querySelector("#new-activity-window").classList;
 var currentActivityView = document.querySelector("#current-activity-window").classList;
+var completedActivityView = document.querySelector("#completed-activity-window").classList;
+
+var newActivityTitle = document.querySelector("#new-activity-title").classList;
+var currentActivityTitle = document.querySelector("#current-activity-title").classList;
+var completedActivityTitle = document.querySelector("#completed-activity-title").classList;
 
 var activityInput = document.querySelector('#activity-name');
 var minuteInput = document.querySelector('#minutes-line');
@@ -9,20 +14,27 @@ var userTimeInput = document.querySelector("#timer");
 var studyRadioBtn = document.querySelector("#study");
 var meditateRadioBtn = document.querySelector("#meditate");
 var exerciseRadioBtn = document.querySelector("#exercise");
-var startActivityBtn = document.querySelector('#start-button');
+var startActivityBtn = document.querySelector('#start-button-box, .activity-window-buttons');
 var roundBtn = document.querySelector("#round-button");
+var logActivityBtn = document.querySelector("#log-activity-button");
+var createNewActivityBtn = document.querySelector("#create-activity-button")
 
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
+var cardColorIndicator = document.querySelector(".color-indicator");
+var congratMessage = document.querySelector("#congrats-message").classList;
 
-var newActivity = [];
+var newActivity;
+var pastActivities = [];
 var isFormCorrect;
+var color;
 
 //EVENT LISTENERS
 startActivityBtn.addEventListener('click', submitActivityForm);
 radioBtnGrp.addEventListener(`click`, switchCategoryBtnImg);
-roundBtn.addEventListener('click', startCountDownTimer);
-
+roundBtn.addEventListener('click', startTimerCountdown);
+logActivityBtn.addEventListener('click', logCompletedActivity);
+createNewActivityBtn.addEventListener('click', returnToMainPage);
 //FUNCTOINS
 function switchCategoryBtnImg() {
   var studyImageEnable = document.querySelector('#study-color-enabled').classList;
@@ -63,27 +75,30 @@ function switchRoundBtnColor(choosenCategory) {
   }
 };
 
-// function clearFormInputs() {
-//   activityInput.value = ""
-//   minuteInput.value = ""
-//   secondInput.value = ""
-//   warningMessage.add("hidden")
-//
-// }
+function switCardIndicatorColor(selectedCategory) {
+  if(selectedCategory === "study") {
+    return color = "#B3FD78";
+  }
+  else if (selectedCategory === "meditate") {
+    return color = "#C278FD";
+  }
+  else if (selectedCategory === "exercise") {
+    return color = "#FD8078";
+  }
+};
 
 function submitActivityForm () {
-  var newActivityTitle = document.querySelector("#new-activity-title").classList;
-  var currentActivityTitle = document.querySelector("#current-activity-title").classList;
 
   scanUserFormForErrors();
   switchRoundBtnColor(getRadioBtnCategory());
+  switCardIndicatorColor(getRadioBtnCategory());
 
-  if(isCorrect === true) {
+  if(isFormCorrect === true) {
     newActivityTitle.add("hidden")
     currentActivityTitle.remove("hidden")
     newActivityFormView.add("hidden");
     currentActivityView.remove("hidden");
-    submitNewActivityForm();
+    createUserNewActivity();
     displayUserInput();
   }
 };
@@ -97,12 +112,12 @@ function scanUserFormForErrors() {
   : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? alert("Please enter numbers only!")
   : (activityInput.value === "") ? warningMessage.remove("hidden")
   : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? alert("Please select a category!")
-  : isCorrect = true;
+  : isFormCorrect = true;
 
-  return isCorrect;
+  return isFormCorrect;
 };
 
-function submitNewActivityForm() {
+function createUserNewActivity() {
   newActivity = new Activity (
   getRadioBtnCategory(),
   activityInput.value,
@@ -121,28 +136,52 @@ function displayUserInput() {
   userTimeInput.innerHTML = (userMinutes < 10 ? "0" : "") + String(userMinutes) + ":" + (userSeconds < 10 ? "0" : "") + String(userSeconds);
 };
 
-function startCountDownTimer() {
-  var secs = newActivity.seconds;
-  var mins = newActivity.minutes;
+function startTimerCountdown () {
+  newActivity.startTimer();
+}
 
-  function tick() {
-    var current_minutes = mins
-    secs--;
-    userTimeInput.innerHTML = (mins < 10 ? "0" : "") + String(current_minutes) + ":" + (secs < 10 ? "0" : "") + String(secs);
-    if( secs > 0 ) {
-      setTimeout(tick, 1000);
-    }
-    else if(secs === 0 && mins > 0) {
-      secs = 60;
-      mins--;
-      setTimeout(tick, 1000);
-    }
-    else if(mins > 1) {
-        startCountDownTimer(mins-1);
-    }
-    else {
-        alert("Time is up!");
-    }
-  }
-  tick();
+function displayCompleteMessage() {
+
+  roundBtn.innerText = "COMPLETE!";
+
+  logActivityBtn.classList.remove("hidden");
+  congratMessage.remove("hidden")
+  userTimeInput.classList.add("hidden")
+}
+
+function logCompletedActivity() {
+  currentActivityView.add("hidden");
+  completedActivityView.remove("hidden");
+  document.querySelector("#no-activity-message").classList.add("hidden")
+  completedActivityTitle.remove("hidden");
+  currentActivityTitle.add("hidden");
+  addCompletedActivityCard();
+}
+
+function addCompletedActivityCard() {
+  newActivity.markComplete()
+  pastActivities.push(newActivity)
+}
+
+function clearFormInputs() {
+  studyRadioBtn.checked = false;
+  meditateRadioBtn.checked = false;
+  exerciseRadioBtn.checked = false;
+  activityInput.value = "";
+  minuteInput.value = "";
+  secondInput.value = "";
+  warningMessage.add("hidden");
+  roundBtn.innerText = "START";
+  logActivityBtn.classList.add("hidden");
+  congratMessage.add("hidden");
+  completedActivityTitle.add("hidden");
+  newActivityTitle.remove("hidden");
+  userTimeInput.classList.remove("hidden")
+}
+
+function returnToMainPage() {
+  clearFormInputs();
+  switchCategoryBtnImg();
+  completedActivityView.add("hidden");
+  newActivityFormView.remove("hidden");
 }
