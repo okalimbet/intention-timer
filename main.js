@@ -20,6 +20,7 @@ var logActivityBtn = document.querySelector("#log-activity-button")
 
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
+var cardColorIndicator = document.querySelector(".color-indicator");
 
 var newActivity = [];
 var isFormCorrect;
@@ -68,14 +69,6 @@ function switchRoundBtnColor(choosenCategory) {
     roundBtn.style.borderColor = "#FD8078";
   }
 };
-
-// function clearFormInputs() {
-//   activityInput.value = ""
-//   minuteInput.value = ""
-//   secondInput.value = ""
-//   warningMessage.add("hidden")
-//
-// }
 
 function submitActivityForm () {
 
@@ -141,7 +134,19 @@ function displayCompleteMessage() {
 function logCompletedActivity() {
   currentActivityView.add("hidden");
   completedActivityView.remove("hidden");
-
+  document.querySelector("#no-activity-message").classList.add("hidden")
   completedActivityTitle.remove("hidden");
   currentActivityTitle.add("hidden");
+  addCompletedActivityCard();
+}
+
+function addCompletedActivityCard() {
+  newActivity.markComplete()
+}
+
+function clearFormInputs() {
+  activityInput.value = ""
+  minuteInput.value = ""
+  secondInput.value = ""
+  warningMessage.add("hidden")
 }
