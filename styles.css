@@ -1,14 +1,3 @@
-/* Main background: #2B2733
-Text on main background: #CBC9CF
-Header, cards: #46424D
-Card shadow: #26222D
-Text on header and cards: #FFF
-Study: #B3FD78
-Meditate: #C278FD
-Exercise: #FD8078
-Error: #EFB7EC */
-
-
 body {
   margin: 0%;
   background-color: #46424D;
@@ -32,36 +21,6 @@ h2 {
   color: #FFF;
 }
 
-p{
-  font-size: 2vh;
-  text-align: center;
-  margin: 1vh 0;
-}
-
-input[type="text"] {
-  width: 97%;
-  background-color: #46424D;
-  border: 0;
-  color: #CBC9CF;
-  outline: none;
-  font-size: 2.5vh;
-}
-
-input[type="number"] {
-  width: 97%;
-  background-color: #46424D;
-  border: 0;
-  color: #CBC9CF;
-  outline: none;
-  font-size: 2.5vh;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 hr {
   margin: 0;
   border-color: #CBC9CF;
@@ -79,7 +38,8 @@ hr {
   overflow: hidden;
 }
 
-.new-activity-box {
+/* -----Title Style Section----- */
+.title-style {
 display: flex;
 flex-direction: column;
 background-color:#2B2733;
@@ -87,10 +47,19 @@ width: 60%;
 margin-right:0.3%;
 }
 
-.past-activity-box {
-  background-color:#2B2733;
-  width: 39.5%;
-  overflow: scroll;
+.activity-title {
+  margin-left: 3.2%;
+  margin-top: 4vh;
+}
+
+/* ------New Activity Section------ */
+.activity-window-buttons {
+  margin-top: 5vh;
+  height: 5vh;
+  width: 25vh;
+  border-radius: 0.5vh;
+  border: 0;
+  font-size: 2.2vh;
 }
 
 .category-box {
@@ -103,8 +72,53 @@ margin-right:0.3%;
   box-shadow: 3px 3px 4px 5px #26222D;
 }
 
-#category-box-wrapper {
-  margin: 10%;
+.category-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0.3vh solid #FFF;
+  border-radius: 0.5vh;
+  width: 22vh;
+  height: 10vh;
+  background-color: #46424D;
+  color: #FFF;
+  font-size: 2.5vh;
+}
+
+.category-images {
+  width: 3vh;
+  height: 3vh;
+  margin-bottom: 0.5vh;
+}
+
+.min-sec-input {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8vh;
+}
+
+.time-inputs-spacing {
+  width: 42%;
+}
+
+input[type="number"] {
+  width: 97%;
+  background-color: #46424D;
+  border: 0;
+  color: #CBC9CF;
+  outline: none;
+  font-size: 2.5vh;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#new-activity-window-wrapper {
+  margin: 6% 10%;
 }
 
 .radio-button-group {
@@ -127,18 +141,66 @@ margin-right:0.3%;
   margin: 0;
 }
 
-.category-buttons {
+#user-activity-inputs {
+  margin-top: 8vh;
+}
+
+input[type="text"] {
+  width: 97%;
+  background-color: #46424D;
+  border: 0;
+  color: #CBC9CF;
+  outline: none;
+  font-size: 2.5vh;
+}
+
+#warning-image {
+  width: 3vh;
+  height: 2.6vh;
+  margin-bottom: 0.5vh;
+}
+
+.warning-message-box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+#warning-phrase {
+  color: #EFB7EC;
+  margin: 3vh 0vh 0 1vh;
+}
+
+#select-category-title {
+  margin-bottom: 3vh;
+}
+
+#start-button-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+/* ---Current Activity Section--- */
+#congrats-message {
+  font-size: 7vh;
+  white-space: nowrap;
+}
+
+#current-activity-description {
+  font-size: 3vh;
+  color: #CBC9CF;
+  margin-bottom: 0;
+}
+
+#current-activity-wrapper {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  border: 0.3vh solid #FFF;
-  border-radius: 0.5vh;
-  width: 22vh;
-  height: 10vh;
-  background-color: #46424D;
-  color: #FFF;
-  font-size: 2.5vh;
+  align-items: center;
+  padding: 0 22vh 0 22vh;
+  margin: 4vh 0 4vh 0;
 }
 
 #round-button {
@@ -168,103 +230,9 @@ input[id="exercise"]:checked + div.category-buttons {
   color: #FD8078;
 }
 
-button:focus { 
+button:focus:active { 
   border: none; 
   outline: none; 
-}
-
-.category-images {
-  width: 3vh;
-  height: 3vh;
-  margin-bottom: 0.5vh;
-}
-
-.activity-title {
-  margin-left: 3.2%;
-  margin-top: 4vh;
-}
-
-#accomplish-inputs {
-  margin-top: 8vh;
-}
-
-#select-category-title {
-  margin-bottom: 3vh;
-}
-
-.new-activity-title {
-  margin-bottom: 3vh;
-}
-
-.warning-message-box {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-
-#warning-phrase {
-  color: #EFB7EC;
-  margin: 3vh 0vh 0 1vh;
-}
-
-#warning-image {
-  width: 3vh;
-  height: 2.6vh;
-  margin-bottom: 0.5vh;
-}
-
-.min-sec-input {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8vh;
-}
-
-#minutes-inputs {
-  width: 42%;
-}
-
-#seconds-inputs {
-  width: 42%;
-  text-align: left;
-}
-
-.activity-window-buttons {
-  margin-top: 5vh;
-  height: 5vh;
-  width: 25vh;
-  border-radius: 0.5vh;
-  border: 0;
-  font-size: 2.2vh;
-}
-
-#log-activity-button {
-  width: 34vh;
-}
-
-#start-button-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: relative;
-}
-
-#no-activity-message {
-  margin-top: 6vh;
-}
-
-#current-activity-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 22vh 0 22vh;
-  margin: 4vh 0 4vh 0;
-}
-
-#current-activity-description {
-  font-size: 3vh;
-  color: #CBC9CF;
-  margin-bottom: 0;
 }
 
 #timer {
@@ -273,13 +241,16 @@ button:focus { 
   font-family: sans-serif;
   color: #FFF;
 }
-#congrats-message {
-  font-size: 8vh;
-  white-space: nowrap;
+
+.timer-message-wrapper {
+  margin: 0 0 4vh 0;
+  height: 13vh;
 }
 
-#completed-activity-window {
-  justify-content: center;
+/* ---Completed Activity Section--- */
+#create-activity-button {
+  width: 42vh;
+  margin-top: 12vh;
 }
 
 #create-activity-button-wrapper {
@@ -288,21 +259,38 @@ button:focus { 
   justify-content: center;
 }
 
-#create-activity-button {
-  width: 42vh;
-  margin-top: 15vh;
+#completed-activity-window {
+  justify-content: center;
 }
 
-.timer-message-wrapper {
-  margin: 0 0 4vh 0;
-  height: 13vh;
+/* ---Past Activity Section--- */
+.card {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
-ul {
-  padding: 0;
-  /* display: flex;
-  flex-direction: column; */
+#card-category {
+  font-weight: 900;
+  color: #FFF;
+  font-size: 1.6vh;
 }
+
+#card-description {
+  font-size: 1.6vh;
+}
+
+#card-time {
+  margin-bottom: 1vh;
+}
+
+.color-indicator {
+  background-color: white;
+  height: 3.5vh;
+  width: 0.5vh;
+  border-radius: 2vh;
+}
+
 li {
   display: flex;
   flex-direction: row;
@@ -315,29 +303,31 @@ li {
   box-shadow: 4px 4px 3px 3px #26222D;
 }
 
-.card {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
+#log-activity-button {
+  width: 34vh;
 }
 
-#card-category {
-  font-weight: 900;
-  color: #FFF;
-  font-size: 1.6vh;
+#no-activity-message {
+  margin-top: 6vh;
 }
-#card-time {
-  margin-bottom: 1vh;
+
+p{
+  font-size: 2vh;
+  text-align: center;
+  margin: 1vh 0;
 }
-#card-description {
-  font-size: 1.6vh;
+
+.past-activity-box {
+  background-color:#2B2733;
+  width: 39.5%;
+  overflow: scroll;
 }
-.color-indicator {
-  background-color: white;
-  height: 3.5vh;
-  width: 0.5vh;
-  border-radius: 2vh;
+
+ul {
+  padding: 0;
 }
+
+/* ---Stays at the bottom to hide all elements--- */
 .hidden {
   display: none;
 }

@@ -9,94 +9,93 @@
 <body>
   <header>INTENTION TIMER</header>
   <main class="wrapper">
-    <section class="new-activity-box">
+    <section class="title-style">
       <h1 id="new-activity-title" class="activity-title">New Activity</h1>
       <h1 id="current-activity-title" class="activity-title hidden">Current Activity</h1>
       <h1 id="completed-activity-title" class="activity-title hidden">Completed Activity</h1>
-      <section id="new-activity-window"class="category-box">
-        <div id="category-box-wrapper">
-          <h2 id="select-category-title">Select a category:</h2>
+    </section>
+    <section id="new-activity-window" class="category-box">
+      <div id="new-activity-window-wrapper">
+        <h2 id="select-category-title">Select a category:</h2>
           <div class="radio-button-group">
             <div class="radio-button-container">
               <input type="radio" name="activity-button" id="study" class="radio-button" value="value">
-              <div class="category-buttons">
-                <div class="radio-icon">
-                  <img id="study-color-disabled" class="category-images" src="./assets/study.svg">
-                  <img id="study-color-enabled" class="category-images hidden" src="./assets/study-active.svg">
+                <div class="category-buttons">
+                  <div>
+                    <img id="study-color-disabled" class="category-images" src="./assets/study.svg">
+                    <img id="study-color-enabled" class="category-images hidden" src="./assets/study-active.svg">
+                  </div>
+                  <label>Study</label>
                 </div>
-                <label class="activity-labels">Study</label>
-              </div>
             </div>
             <div class="radio-button-container">
               <input type="radio" name="activity-button" id="meditate" class="radio-button">
               <div class="category-buttons">
-                <div class="radio-icon">
+                <div>
                   <img id="meditate-color-disabled" class="category-images" src="./assets/meditate.svg">
                   <img id="meditate-color-enabled" class="category-images hidden" src="./assets/meditate-active.svg">
                 </div>
-                <label class="activity-labels">Meditate</label>
+                <label>Meditate</label>
               </div>
             </div>
             <div class="radio-button-container">
               <input type="radio" name="activity-button" id="exercise" class="radio-button">
               <div class="category-buttons">
-                <div class="radio-icon">
+                <div>
                   <img id="exercise-color-disabled" class="category-images" src="./assets/exercise.svg">
                   <img id="exercise-color-enabled" class="category-images hidden" src="./assets/exercise-active.svg">
                 </div>
-                <label class="activity-labels">Exercise</label>
+                <label>Exercise</label>
               </div>
             </div>
           </div>
-          <div id="accomplish-inputs">
-            <h2 class="new-activity-title">What would you like to accomplish during this time?</h2>
+          <div id="user-activity-inputs">
+            <h2>What would you like to accomplish during this time?</h2>
             <input type="text" name="activity-input" id="activity-name">
-            <!-- to do: refactor id names to be more consistent (all inputs) -->
             <hr>
           </div>
-          <div class="warning-message-box hidden">
+            <div class="warning-message-box hidden">
             <img id="warning-image" src="./assets/warning.svg">
             <h2 id="warning-phrase">A description is required.</h2>
           </div>
           <div class="min-sec-input">
-            <div id="minutes-inputs">
-              <h2 class="new-activity-title">Minutes</h2>
-              <input type="number" name="activity-input" id="minutes-line" min"0" max="60">
-              <hr>
+            <div class="time-inputs-spacing">
+              <h2>Minutes</h2>
+                <input type="number" name="activity-input" id="minutes-line" min"0" max="60">
+                <hr>
             </div>
-            <div id="seconds-inputs">
-              <h2 class="new-activity-title">Seconds</h2>
+            <div class="time-inputs-spacing">
+              <h2>Seconds</h2>
               <input type="number" name="activity-input" id="seconds-line" min="0" max="59">
               <hr>
             </div>
           </div>
           <div id="start-button-box">
-            <button type="button" class="activity-window-buttons">START ACTIVITY</button>
+            <button class="activity-window-buttons">START ACTIVITY</button>
           </div>
-        </div>
-      </section>
-      <section id="current-activity-window" class="category-box hidden">
-        <div id="current-activity-wrapper" class="">
-          <h2 id="current-activity-description">Deep Breathing</h2>
-            <div class="timer-message-wrapper">
-              <span id="timer" class="">00:59</span>
-              <span id="congrats-message" class="hidden">You did it!</span>
-            </div>
-            <button type="button" id="round-button">START</button>
-            <button id="log-activity-button" class="activity-window-buttons hidden">LOG ACTIVITY</button>
-        </div>
-      </section>
-      <section id="completed-activity-window" class="category-box hidden">
-        <div id="create-activity-button-wrapper">
-        <button id="create-activity-button" class="activity-window-buttons">CREATE A NEW ACTIVITY</button>
       </div>
-      </section>
+    </section>
+    <section id="current-activity-window" class="category-box hidden">
+      <div id="current-activity-wrapper">
+        <h2 id="current-activity-description">Deep Breathing</h2>
+          <div class="timer-message-wrapper">
+            <span id="timer">00:59</span>
+            <span id="congrats-message" class="hidden">Congrats, you did it!</span>
+          </div>
+          <button id="round-button">START</button>
+          <button id="log-activity-button" class="activity-window-buttons hidden">LOG ACTIVITY</button>
+      </div>
+    </section>
+    <section id="completed-activity-window" class="category-box hidden">
+      <div id="create-activity-button-wrapper">
+      <button id="create-activity-button" class="activity-window-buttons">CREATE A NEW ACTIVITY</button>
+      </div>
     </section>
     <section class="past-activity-box">
       <h1 class="activity-title">Past Activities</h1>
-      <section id="past-activity-tracker">
+      <div id="past-activity-tracker">
         <div id="activity-cards">
-          <div id="no-activity-message" class="">
+          <div id="no-activity-message">
             <p>You haven't log any activities yet.</p>
             <p>Complete the form to the left to get started!</p>
           </div>
@@ -105,7 +104,7 @@
             </ul>
           </div>
         </div>
-      </section>
+      </div>
     </section>
   </main>
 </body>
