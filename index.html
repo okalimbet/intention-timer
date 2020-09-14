@@ -54,9 +54,9 @@
             <input type="text" name="activity-input" id="activity-name">
             <hr>
           </div>
-            <div class="warning-message-box hidden">
+          <div class="warning-message-box hidden">
             <img id="warning-image" src="./assets/warning.svg">
-            <h2 id="warning-phrase">A description is required.</h2>
+            <h2 class="warning-phrase">A description is required.</h2>
           </div>
           <div class="min-sec-input">
             <div class="time-inputs-spacing">
@@ -70,6 +70,10 @@
               <hr>
             </div>
           </div>
+          <div id="time-error-message" class="warning-message-box hidden">
+            <img id="warning-image" src="./assets/warning.svg">
+            <h2 id="time-warning-phrase" class="warning-phrase"></h2>
+          </div>
           <div id="start-button-box">
             <button class="activity-window-buttons">START ACTIVITY</button>
           </div>
@@ -79,7 +83,7 @@
       <div id="current-activity-wrapper">
         <h2 id="current-activity-description">Deep Breathing</h2>
           <div class="timer-message-wrapper">
-            <span id="timer">00:59</span>
+            <span id="timer"></span>
             <span id="congrats-message" class="hidden">Congrats, you did it!</span>
           </div>
           <button id="round-button">START</button>

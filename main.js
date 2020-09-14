@@ -70,7 +70,7 @@ function switchRoundBtnColor(choosenCategory) {
   else if (choosenCategory === "meditate") {
       roundBtn.style.borderColor = "#C278FD";
   }
-  else if (choosenCategory === "exercise") {
+  else {
     roundBtn.style.borderColor = "#FD8078";
   }
 };
@@ -82,7 +82,7 @@ function switCardIndicatorColor(selectedCategory) {
   else if (selectedCategory === "meditate") {
     return color = "#C278FD";
   }
-  else if (selectedCategory === "exercise") {
+  else {
     return color = "#FD8078";
   }
 };
@@ -90,28 +90,32 @@ function switCardIndicatorColor(selectedCategory) {
 function submitActivityForm () {
 
   scanUserFormForErrors();
-  switchRoundBtnColor(getRadioBtnCategory());
-  switCardIndicatorColor(getRadioBtnCategory());
 
   if(isFormCorrect === true) {
-    newActivityTitle.add("hidden")
-    currentActivityTitle.remove("hidden")
-    newActivityFormView.add("hidden");
-    currentActivityView.remove("hidden");
+    displayCurrentActivityWindow()
     createUserNewActivity();
     displayUserInput();
+    switchRoundBtnColor(getRadioBtnCategory());
+    switCardIndicatorColor(getRadioBtnCategory());
   }
 };
 
 function scanUserFormForErrors() {
+  var errors = {
+    error1: "Please enter minutes(00-99) and seconds(00-59)",
+    error2: "Please enter numbers only!",
+    error3: "Please select a category!",
+  }
+
   var dotSymbol = ".";
   var dashSymbol = "-";
-  (minuteInput.value.length !== 2 || secondInput.value.length !== 2 || secondInput.value > 59) ? alert("Please enter minutes(00-99) and seconds(00-59)")
-  : (minuteInput.value.includes(dashSymbol) || secondInput.value.includes(dashSymbol)) ? alert("Please enter numbers only!")
-  : (minuteInput.value === "" || secondInput.value === "") ? alert("Please enter numbers only!")
-  : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? alert("Please enter numbers only!")
+  var timeErrorBox = document.querySelector("#time-error-message").classList;
+  var timeErrorMessage = document.querySelector("#time-warning-phrase");
+  (minuteInput.value.length !== 2 || secondInput.value.length !== 2 || secondInput.value > 59) ? (timeErrorMessage.innerText = errors.error1, timeErrorBox.remove("hidden"))
+  : (minuteInput.value.includes(dashSymbol) || secondInput.value.includes(dashSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
+  : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
   : (activityInput.value === "") ? warningMessage.remove("hidden")
-  : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? alert("Please select a category!")
+  : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? (timeErrorMessage.innerText = errors.error3, timeErrorBox.remove("hidden"))
   : isFormCorrect = true;
 
   return isFormCorrect;
@@ -127,6 +131,34 @@ function createUserNewActivity() {
   )
 };
 
+function displayNewActivityWindow() {
+  completedActivityView.add("hidden");
+  completedActivityTitle.add("hidden");
+  newActivityFormView.remove("hidden");
+  newActivityTitle.remove("hidden");
+}
+
+function displayCurrentActivityWindow() {
+  newActivityFormView.add("hidden");
+  newActivityTitle.add("hidden");
+  currentActivityView.remove("hidden");
+  currentActivityTitle.remove("hidden");
+  logActivityBtn.classList.remove("hidden");
+  userTimeInput.classList.remove("hidden");
+  roundBtn.innerText = "START";
+  logActivityBtn.disabled = true;
+}
+
+function displayCompletedActivityWindow() {
+  document.querySelector("#no-activity-message").classList.add("hidden")
+  completedActivityTitle.remove("hidden");
+  completedActivityView.remove("hidden");
+  currentActivityView.add("hidden");
+  currentActivityTitle.add("hidden");
+  logActivityBtn.classList.add("hidden");
+  congratMessage.add("hidden");
+}
+
 function displayUserInput() {
   var userDescription = document.querySelector("#current-activity-description");
   var userMinutes = newActivity.minutes;
@@ -136,7 +168,7 @@ function displayUserInput() {
   userTimeInput.innerHTML = (userMinutes < 10 ? "0" : "") + String(userMinutes) + ":" + (userSeconds < 10 ? "0" : "") + String(userSeconds);
 };
 
-function startTimerCountdown () {
+function startTimerCountdown() {
   newActivity.startTimer();
 }
 
@@ -144,17 +176,12 @@ function displayCompleteMessage() {
 
   roundBtn.innerText = "COMPLETE!";
 
-  logActivityBtn.classList.remove("hidden");
   congratMessage.remove("hidden")
   userTimeInput.classList.add("hidden")
 }
 
 function logCompletedActivity() {
-  currentActivityView.add("hidden");
-  completedActivityView.remove("hidden");
-  document.querySelector("#no-activity-message").classList.add("hidden")
-  completedActivityTitle.remove("hidden");
-  currentActivityTitle.add("hidden");
+  displayCompletedActivityWindow()
   addCompletedActivityCard();
 }
 
@@ -171,17 +198,10 @@ function clearFormInputs() {
   minuteInput.value = "";
   secondInput.value = "";
   warningMessage.add("hidden");
-  roundBtn.innerText = "START";
-  logActivityBtn.classList.add("hidden");
-  congratMessage.add("hidden");
-  completedActivityTitle.add("hidden");
-  newActivityTitle.remove("hidden");
-  userTimeInput.classList.remove("hidden")
 }
 
 function returnToMainPage() {
   clearFormInputs();
   switchCategoryBtnImg();
-  completedActivityView.add("hidden");
-  newActivityFormView.remove("hidden");
+  displayNewActivityWindow()
 }
