@@ -21,7 +21,7 @@ class Activity {
             setTimeout(tick, 1000);
           }
           else if(secs === 0 && mins > 0) {
-            secs = 60;
+            secs = 59;
             mins--;
             setTimeout(tick, 1000);
           }
