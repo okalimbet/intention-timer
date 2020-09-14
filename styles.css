@@ -166,7 +166,7 @@ input[type="text"] {
   align-items: flex-end;
 }
 
-#warning-phrase {
+.warning-phrase {
   color: #EFB7EC;
   margin: 3vh 0vh 0 1vh;
 }
@@ -182,6 +182,9 @@ input[type="text"] {
   position: relative;
 }
 
+#time-error-message {
+  height: 4vh;
+}
 /* ---Current Activity Section--- */
 #congrats-message {
   font-size: 7vh;
