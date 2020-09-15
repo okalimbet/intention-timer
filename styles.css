@@ -218,17 +218,17 @@ input[type="text"] {
   border-color: #FFF;
 }
 
-input[id="study"]:checked + div.category-buttons {
+input[id="Study"]:checked + div.category-buttons {
   border: 0.3vh solid #B3FD78;
   color: #B3FD78;
 }
 
-input[id="meditate"]:checked + div.category-buttons {
+input[id="Meditate"]:checked + div.category-buttons {
   border: 0.3vh solid #C278FD;
   color: #C278FD;
 }
 
-input[id="exercise"]:checked + div.category-buttons {
+input[id="Exercise"]:checked + div.category-buttons {
   border: 0.3vh solid #FD8078;
   color: #FD8078;
 }
@@ -276,7 +276,7 @@ button:focus:active { 
 #card-category {
   font-weight: 900;
   color: #FFF;
-  font-size: 1.6vh;
+  font-size: 2vh;
 }
 
 #card-description {
