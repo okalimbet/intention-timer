@@ -11,23 +11,28 @@ var minuteInput = document.querySelector('#minutes-line');
 var secondInput = document.querySelector('#seconds-line');
 var userTimeInput = document.querySelector("#timer");
 
-var studyRadioBtn = document.querySelector("#study");
-var meditateRadioBtn = document.querySelector("#meditate");
-var exerciseRadioBtn = document.querySelector("#exercise");
+var studyRadioBtn = document.querySelector("#Study");
+var meditateRadioBtn = document.querySelector("#Meditate");
+var exerciseRadioBtn = document.querySelector("#Exercise");
 var startActivityBtn = document.querySelector('#start-button-box, .activity-window-buttons');
 var roundBtn = document.querySelector("#round-button");
 var logActivityBtn = document.querySelector("#log-activity-button");
 var createNewActivityBtn = document.querySelector("#create-activity-button")
 
+var noActivitiesMessage = document.querySelector("#no-activity-message").classList;
+var timeErrorBox = document.querySelector("#time-error-message").classList;
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
 var cardColorIndicator = document.querySelector(".color-indicator");
 var congratMessage = document.querySelector("#congrats-message").classList;
+var ul = document.querySelector('ul');
+var li = document.createElement('li');
 
 var newActivity;
 var pastActivities = [];
 var isFormCorrect;
 var color;
+var keyNum = 0;
 
 //EVENT LISTENERS
 startActivityBtn.addEventListener('click', submitActivityForm);
@@ -35,6 +40,7 @@ radioBtnGrp.addEventListener(`click`, switchCategoryBtnImg);
 roundBtn.addEventListener('click', startTimerCountdown);
 logActivityBtn.addEventListener('click', logCompletedActivity);
 createNewActivityBtn.addEventListener('click', returnToMainPage);
+window.addEventListener('load', displaySavedPastActivities);
 //FUNCTOINS
 function switchCategoryBtnImg() {
   var studyImageEnable = document.querySelector('#study-color-enabled').classList;
@@ -43,11 +49,11 @@ function switchCategoryBtnImg() {
   var meditateImageDisable = document.querySelector('#meditate-color-disabled').classList;
   var exerciseImageEnable = document.querySelector('#exercise-color-enabled').classList;
   var exerciseImageDisable = document.querySelector('#exercise-color-disabled').classList;
-  event.target.id === "study" ? (studyImageEnable.remove("hidden"), studyImageDisable.add("hidden"))
+  event.target.id === "Study" ? (studyImageEnable.remove("hidden"), studyImageDisable.add("hidden"))
   :(studyImageEnable.add("hidden"),studyImageDisable.remove("hidden"));
-  event.target.id === "meditate" ? (meditateImageEnable.remove("hidden"), meditateImageDisable.add("hidden"))
+  event.target.id === "Meditate" ? (meditateImageEnable.remove("hidden"), meditateImageDisable.add("hidden"))
   :(meditateImageEnable.add("hidden"),meditateImageDisable.remove("hidden"));
-  event.target.id === "exercise" ? (exerciseImageEnable.remove("hidden"), exerciseImageDisable.add("hidden"))
+  event.target.id === "Exercise" ? (exerciseImageEnable.remove("hidden"), exerciseImageDisable.add("hidden"))
   :(exerciseImageEnable.add("hidden"),exerciseImageDisable.remove("hidden"));
 };
 
@@ -64,10 +70,10 @@ function getRadioBtnCategory() {
 };
 
 function switchRoundBtnColor(choosenCategory) {
-  if(choosenCategory === "study") {
+  if(choosenCategory === "Study") {
     roundBtn.style.borderColor = "#B3FD78";
   }
-  else if (choosenCategory === "meditate") {
+  else if (choosenCategory === "Meditate") {
       roundBtn.style.borderColor = "#C278FD";
   }
   else {
@@ -76,10 +82,10 @@ function switchRoundBtnColor(choosenCategory) {
 };
 
 function switCardIndicatorColor(selectedCategory) {
-  if(selectedCategory === "study") {
+  if(selectedCategory === "Study") {
     return color = "#B3FD78";
   }
-  else if (selectedCategory === "meditate") {
+  else if (selectedCategory === "Meditate") {
     return color = "#C278FD";
   }
   else {
@@ -92,11 +98,11 @@ function submitActivityForm () {
   scanUserFormForErrors();
 
   if(isFormCorrect === true) {
-    displayCurrentActivityWindow()
+    displayCurrentActivityWindow();
+    switCardIndicatorColor(getRadioBtnCategory());
     createUserNewActivity();
     displayUserInput();
     switchRoundBtnColor(getRadioBtnCategory());
-    switCardIndicatorColor(getRadioBtnCategory());
   }
 };
 
@@ -105,11 +111,10 @@ function scanUserFormForErrors() {
     error1: "Please enter minutes(00-99) and seconds(00-59)",
     error2: "Please enter numbers only!",
     error3: "Please select a category!",
-  }
+  };
 
   var dotSymbol = ".";
   var dashSymbol = "-";
-  var timeErrorBox = document.querySelector("#time-error-message").classList;
   var timeErrorMessage = document.querySelector("#time-warning-phrase");
   (minuteInput.value.length !== 2 || secondInput.value.length !== 2 || secondInput.value > 59) ? (timeErrorMessage.innerText = errors.error1, timeErrorBox.remove("hidden"))
   : (minuteInput.value.includes(dashSymbol) || secondInput.value.includes(dashSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
@@ -128,6 +133,7 @@ function createUserNewActivity() {
   parseInt(minuteInput.value),
   parseInt(secondInput.value),
   false,
+  color,
   )
 };
 
@@ -136,7 +142,9 @@ function displayNewActivityWindow() {
   completedActivityTitle.add("hidden");
   newActivityFormView.remove("hidden");
   newActivityTitle.remove("hidden");
-}
+  timeErrorBox.add("hidden");
+  isFormCorrect = false;
+};
 
 function displayCurrentActivityWindow() {
   newActivityFormView.add("hidden");
@@ -147,17 +155,17 @@ function displayCurrentActivityWindow() {
   userTimeInput.classList.remove("hidden");
   roundBtn.innerText = "START";
   logActivityBtn.disabled = true;
-}
+};
 
 function displayCompletedActivityWindow() {
-  document.querySelector("#no-activity-message").classList.add("hidden")
+  noActivitiesMessage.add("hidden")
   completedActivityTitle.remove("hidden");
   completedActivityView.remove("hidden");
   currentActivityView.add("hidden");
   currentActivityTitle.add("hidden");
   logActivityBtn.classList.add("hidden");
   congratMessage.add("hidden");
-}
+};
 
 function displayUserInput() {
   var userDescription = document.querySelector("#current-activity-description");
@@ -170,25 +178,26 @@ function displayUserInput() {
 
 function startTimerCountdown() {
   newActivity.startTimer();
-}
+};
 
 function displayCompleteMessage() {
 
   roundBtn.innerText = "COMPLETE!";
 
-  congratMessage.remove("hidden")
-  userTimeInput.classList.add("hidden")
-}
+  congratMessage.remove("hidden");
+  userTimeInput.classList.add("hidden");
+};
 
 function logCompletedActivity() {
-  displayCompletedActivityWindow()
+  displayCompletedActivityWindow();
   addCompletedActivityCard();
-}
+};
 
 function addCompletedActivityCard() {
-  newActivity.markComplete()
-  pastActivities.push(newActivity)
-}
+  newActivity.markComplete();
+  pastActivities.push(newActivity);
+  addSavedPastActivities();
+};
 
 function clearFormInputs() {
   studyRadioBtn.checked = false;
@@ -198,10 +207,44 @@ function clearFormInputs() {
   minuteInput.value = "";
   secondInput.value = "";
   warningMessage.add("hidden");
-}
+};
 
 function returnToMainPage() {
   clearFormInputs();
   switchCategoryBtnImg();
-  displayNewActivityWindow()
-}
+  displayNewActivityWindow();
+};
+
+function addSavedPastActivities() {
+  newActivity.saveToStorage();
+};
+
+function displaySavedPastActivities() {
+  if(localStorage.length === 0) {
+    return;
+  }
+  else {
+    noActivitiesMessage.add("hidden");
+    var orderedPastActivityCards = {};
+    Object.keys(localStorage).sort().forEach(function(key) {
+      orderedPastActivityCards[key] = localStorage[key];
+    });
+    var localStorageValues = Object.values(orderedPastActivityCards);
+
+    for (var i = 0; i < localStorageValues.length; i++) {
+      var savedCard = localStorageValues[i];
+      var parsedSavedCard = JSON.parse(savedCard);
+      var savedActivityCardBlock =
+       `
+         <li id=${parsedSavedCard.id}><div class="card">
+           <label id="card-category">${parsedSavedCard.category}</label>
+           <label id="card-time">${parsedSavedCard.minutes} MIN ${(parsedSavedCard.seconds === 0 ? "" : (parsedSavedCard.seconds + " SECONDS"))}</label>
+           <label id="card-description">${parsedSavedCard.description}</label>
+         </div>
+         <div class="color-indicator" style="background-color: ${[parsedSavedCard.color]};"></div>
+         </li>
+        `
+      ul.insertAdjacentHTML("afterbegin", savedActivityCardBlock);
+    }
+  }
+};
