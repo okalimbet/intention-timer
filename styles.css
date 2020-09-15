@@ -54,7 +54,6 @@ margin-right:0.3%;
 
 /* ------New Activity Section------ */
 .activity-window-buttons {
-  margin-top: 5vh;
   height: 5vh;
   width: 25vh;
   border-radius: 0.5vh;
@@ -177,14 +176,26 @@ input[type="text"] {
 
 #start-button-box {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
   align-items: flex-end;
-  position: relative;
+  position: absolute;
+  margin: 2vh 0;
 }
 
-#time-error-message {
-  height: 4vh;
+#start-activity-button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
 }
+
+#time-warning-phrase {
+  margin: 0 0 0 1vh;
+  font-size: 2.2vh;
+  width: 100%;
+}
+
 /* ---Current Activity Section--- */
 #congrats-message {
   font-size: 7vh;
@@ -308,6 +319,7 @@ li {
 
 #log-activity-button {
   width: 34vh;
+  margin-top: 3.5vh;
 }
 
 #no-activity-message {
