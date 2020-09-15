@@ -17,7 +17,7 @@ var exerciseRadioBtn = document.querySelector("#Exercise");
 var startActivityBtn = document.querySelector('#start-button-box, .activity-window-buttons');
 var roundBtn = document.querySelector("#round-button");
 var logActivityBtn = document.querySelector("#log-activity-button");
-var createNewActivityBtn = document.querySelector("#create-activity-button")
+var createNewActivityBtn = document.querySelector("#create-activity-button");
 
 var noActivitiesMessage = document.querySelector("#no-activity-message").classList;
 var timeErrorBox = document.querySelector("#time-error-message").classList;
@@ -25,6 +25,8 @@ var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
 var cardColorIndicator = document.querySelector(".color-indicator");
 var congratMessage = document.querySelector("#congrats-message").classList;
+var descriptionLine = document.querySelector("#user-activity-inputs hr").style;
+
 var ul = document.querySelector('ul');
 var li = document.createElement('li');
 
@@ -32,7 +34,6 @@ var newActivity;
 var pastActivities = [];
 var isFormCorrect;
 var color;
-var keyNum = 0;
 
 //EVENT LISTENERS
 startActivityBtn.addEventListener('click', submitActivityForm);
@@ -119,7 +120,7 @@ function scanUserFormForErrors() {
   (minuteInput.value.length !== 2 || secondInput.value.length !== 2 || secondInput.value > 59) ? (timeErrorMessage.innerText = errors.error1, timeErrorBox.remove("hidden"))
   : (minuteInput.value.includes(dashSymbol) || secondInput.value.includes(dashSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
   : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
-  : (activityInput.value === "") ? warningMessage.remove("hidden")
+  : (activityInput.value === "") ? (warningMessage.remove("hidden"), descriptionLine.borderColor = "#EFB7EC")
   : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? (timeErrorMessage.innerText = errors.error3, timeErrorBox.remove("hidden"))
   : isFormCorrect = true;
 
@@ -158,7 +159,7 @@ function displayCurrentActivityWindow() {
 };
 
 function displayCompletedActivityWindow() {
-  noActivitiesMessage.add("hidden")
+  noActivitiesMessage.add("hidden");
   completedActivityTitle.remove("hidden");
   completedActivityView.remove("hidden");
   currentActivityView.add("hidden");
@@ -207,6 +208,7 @@ function clearFormInputs() {
   minuteInput.value = "";
   secondInput.value = "";
   warningMessage.add("hidden");
+  descriptionLine.borderColor = "#CBC9CF";
 };
 
 function returnToMainPage() {
