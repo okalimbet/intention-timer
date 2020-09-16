@@ -21,6 +21,13 @@ var createNewActivityBtn = document.querySelector("#create-activity-button");
 
 var noActivitiesMessage = document.querySelector("#no-activity-message").classList;
 var timeErrorBox = document.querySelector("#time-error-message").classList;
+var timeErrorMessage = document.querySelector("#time-warning-phrase");
+var errors = {
+  error1: "Please enter minutes(0-99)",
+  error2: "Please enter seconds(0-59)",
+  error3: "Please enter numbers only!",
+  error4: "Please select a category!",
+};
 var radioBtnGrp = document.querySelector('.radio-button-group');
 var warningMessage = document.querySelector(".warning-message-box").classList;
 var cardColorIndicator = document.querySelector(".color-indicator");
@@ -41,6 +48,7 @@ roundBtn.addEventListener('click', startTimerCountdown);
 logActivityBtn.addEventListener('click', logCompletedActivity);
 createNewActivityBtn.addEventListener('click', returnToMainPage);
 window.addEventListener('load', displaySavedPastActivities);
+
 //FUNCTOINS
 function switchCategoryBtnImg() {
   var studyImageEnable = document.querySelector('#study-color-enabled').classList;
@@ -106,24 +114,47 @@ function submitActivityForm () {
   }
 };
 
-function scanUserFormForErrors() {
-  var errors = {
-    error1: "Please enter minutes(00-99) and seconds(00-59)",
-    error2: "Please enter numbers only!",
-    error3: "Please select a category!",
-  };
 
+function scanUserFormForErrors() {
+  var isConditionOneCorrect = useSpecificNumberRangeOnly();
+  var isConditionTwoCorrect = useNumbersOnly();
+  var isConditionThreeCorrect = chooseCategoryAndDes();
+
+  if (isConditionOneCorrect && isConditionTwoCorrect && isConditionThreeCorrect) {
+    isFormCorrect = true;
+    return isFormCorrect;
+  }
+  else {
+    isFormCorrect = false;
+    return isFormCorrect;
+  };
+};
+
+function useSpecificNumberRangeOnly() {
+  var resultOne;
+  (minuteInput.value < 0 || minuteInput.value > 99 || minuteInput.value === "") ? (timeErrorMessage.innerText = errors.error1, timeErrorBox.remove("hidden"))
+  : (secondInput.value < 0 || secondInput.value > 59 || secondInput.value === "") ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
+  : resultOne = true;
+  return resultOne;
+};
+
+function useNumbersOnly() {
+  var resultTwo;
   var dotSymbol = ".";
   var dashSymbol = "-";
-  var timeErrorMessage = document.querySelector("#time-warning-phrase");
-  (minuteInput.value.length !== 2 || secondInput.value.length !== 2 || secondInput.value > 59) ? (timeErrorMessage.innerText = errors.error1, timeErrorBox.remove("hidden"))
-  : (minuteInput.value.includes(dashSymbol) || secondInput.value.includes(dashSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
-  : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? (timeErrorMessage.innerText = errors.error2, timeErrorBox.remove("hidden"))
-  : (activityInput.value === "") ? (warningMessage.remove("hidden"), descriptionLine.borderColor = "#EFB7EC")
-  : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? (timeErrorMessage.innerText = errors.error3, timeErrorBox.remove("hidden"))
-  : isFormCorrect = true;
 
-  return isFormCorrect;
+  (minuteInput.value.includes(dashSymbol) || secondInput.value.includes(dashSymbol)) ? (timeErrorMessage.innerText = errors.error3, timeErrorBox.remove("hidden"))
+  : (minuteInput.value.includes(dotSymbol) || secondInput.value.includes(dotSymbol)) ? (timeErrorMessage.innerText = errors.error3, timeErrorBox.remove("hidden"))
+  : resultTwo = true;
+  return resultTwo;
+};
+
+function chooseCategoryAndDes() {
+  var resultThree;
+  (activityInput.value === "") ? (warningMessage.remove("hidden"), descriptionLine.borderColor = "#EFB7EC")
+  : (!studyRadioBtn.checked && !meditateRadioBtn.checked && !exerciseRadioBtn.checked) ? (timeErrorMessage.innerText = errors.error4, timeErrorBox.remove("hidden"))
+  : resultThree = true;
+  return resultThree;
 };
 
 function createUserNewActivity() {
