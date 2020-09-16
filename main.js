@@ -31,7 +31,6 @@ var ul = document.querySelector('ul');
 var li = document.createElement('li');
 
 var newActivity;
-var pastActivities = [];
 var isFormCorrect;
 var color;
 
@@ -196,7 +195,6 @@ function logCompletedActivity() {
 
 function addCompletedActivityCard() {
   newActivity.markComplete();
-  pastActivities.push(newActivity);
   addSavedPastActivities();
 };
 
