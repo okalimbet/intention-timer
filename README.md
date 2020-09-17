@@ -74,7 +74,7 @@ Activities that you've chosen to log will appear in the Past Activities section 
 
 ---
 ### Past Activities (and Local Storage)
-Once you've logged your activity, the option to `Start A New Activity` will be presented. Selecting this option will place the original form in front of you, where you'll be able to set new parameters and create another timer! 
+Once you've logged your activity, the option to `Create A New Activity` will be presented. Selecting this option will place the original form in front of you, where you'll be able to set new parameters and create another timer! 
 Rinse and repeat until you're satisfied that you've efficiently practiced focused mindfulness to your heart's content.
 <p align = "center">
 <img src="https://media.giphy.com/media/U1mYebiC4h78gCHgOC/giphy.gif">
